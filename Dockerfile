@@ -1,5 +1,5 @@
-# Use a specific Python base image (Python 3.10 is stable and avoids ImpImporter issue)
-FROM python:3.10-slim-buster
+# Use a more recent Python base image (Python 3.10 on Debian Bullseye)
+FROM python:3.10-slim-bullseye
 
 # Set the working directory in the container
 WORKDIR /app
