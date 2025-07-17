@@ -7,8 +7,10 @@ WORKDIR /app
 # Install system dependencies required for 'ta' and other potential packages
 # 'build-essential' provides compilers (gcc, g++)
 # 'python3-dev' provides Python header files needed for C extensions
-# Adding --fix-missing and apt-get clean for more robust package installation
-RUN apt-get update --fix-missing && \
+# Implementing a retry mechanism for apt-get update to handle transient network issues
+RUN for i in $(seq 1 5); do \
+    apt-get update --fix-missing && break || sleep 5; \
+done && \
     apt-get install -y --no-install-recommends \
     build-essential \
     python3-dev && \
