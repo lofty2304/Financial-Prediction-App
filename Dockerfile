@@ -7,10 +7,12 @@ WORKDIR /app
 # Install system dependencies required for 'ta' and other potential packages
 # 'build-essential' provides compilers (gcc, g++)
 # 'python3-dev' provides Python header files needed for C extensions
-RUN apt-get update && \
+# Adding --fix-missing and apt-get clean for more robust package installation
+RUN apt-get update --fix-missing && \
     apt-get install -y --no-install-recommends \
     build-essential \
     python3-dev && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy requirements.txt and install Python dependencies
